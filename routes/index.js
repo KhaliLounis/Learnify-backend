@@ -7,15 +7,14 @@ const moduleRouter = require("./module");
 const progressRouter = require("./progress");
 const quizRouter = require("./quiz");
 const assignmentRouter = require("./assignment");
-
+const verifyAuth = require("../middleware/auth");
 router.use("/auth", authRouter);
 router.use("/users", userRouter);
 router.use("/discussions", discussionRouter);
-router.use("/courses", courseRouter);
+router.use("/courses", verifyAuth, courseRouter);
 router.use("/modules", moduleRouter);
 router.use("/quizzes", quizRouter);
 router.use("/assignments", assignmentRouter);
 // router.use("/progress", progressRouter);
 
 module.exports = router;
-
