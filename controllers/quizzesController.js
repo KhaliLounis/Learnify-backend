@@ -1,22 +1,22 @@
 const Quiz = require("../models/Quiz");
 const Module = require("../models/Module");
 const User = require("../models/User");
-const getQuiz = (req, res) => {
+const getQuiz = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const getModuleQuizzes = (req, res) => {
+const getModuleQuizzes = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const createQuiz = (req, res) => {
+const createQuiz = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const updateQuiz = (req, res) => {
+const updateQuiz = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const deleteQuiz = (req, res) => {
+const deleteQuiz = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const submitQuiz = (req, res) => {
+const submitQuiz = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
 

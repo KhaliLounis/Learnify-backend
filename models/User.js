@@ -6,15 +6,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide name"],
     },
-    profilePictureUrl: {
+    imageUrl: {
       type: String,
     },
-    joinedCourses: [
-      {
-        type: mongoose.Types.ObjectId,
-        ref: "Course",
-      },
-    ],
     email: {
       type: String,
       required: [true, "Please provide email"],
@@ -24,15 +18,21 @@ const userSchema = new mongoose.Schema(
       ],
       unique: true,
     },
+    password: {
+      type: String,
+      required: [true, "Please provide password"],
+      minlength: [8,"Passowrd needs to be at least 8 chararcters"], //check why it isnt working
+    },
+    joinedCourses: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Course",
+      },
+    ],
     role: {
       type: String,
       enum: ["Student", "Instructor", "Admin"],
       required: [true, "Please provide role"],
-    },
-    password: {
-      type: String,
-      required: [true, "Please provide password"],
-      minlength: 8,
     },
   },
   { timestamps: true }

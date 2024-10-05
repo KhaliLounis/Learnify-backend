@@ -1,28 +1,28 @@
 const Discussion = require("../models/Discussion");
 const Module = require("../models/Module");
 const User = require("../models/User");
-const getDiscussion = (req, res) => {
+const getDiscussion = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const getCourseDiscussions = (req, res) => {
+const getCourseDiscussions = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const createDiscussion = (req, res) => {
+const createDiscussion = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const updateDiscussion = (req, res) => {
+const updateDiscussion = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const upvoteDiscussion = (req, res) => {
+const upvoteDiscussion = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const replyToDiscussion = (req, res) => {
+const replyToDiscussion = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const deleteDiscussion = (req, res) => {
+const deleteDiscussion = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const submitDiscussion = (req, res) => {
+const submitDiscussion = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
 
@@ -33,5 +33,4 @@ module.exports = {
   upvoteDiscussion,
   replyToDiscussion,
   deleteDiscussion,
-
 };

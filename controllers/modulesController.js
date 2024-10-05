@@ -1,18 +1,18 @@
 const Module = require("../models/Module");
 const Course = require("../models/Course");
-const getModule = (req, res) => {
+const getModule = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const getCourseModules = (req, res) => {
+const getCourseModules = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const createModule = (req, res) => {
+const createModule = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const updateModule = (req, res) => {
+const updateModule = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const deleteModule = (req, res) => {
+const deleteModule = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
 

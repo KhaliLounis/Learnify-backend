@@ -9,15 +9,18 @@ const courseSchema = new mongoose.Schema(
     description: {
       type: String,
     },
+    level: {
+      type: String,
+    },
+    imageUrl: {
+        type:String
+    },
     moduleIds: [
       {
         type: mongoose.Types.ObjectId,
         ref: "Module",
       },
     ],
-    level: {
-      type: String,
-    },
     discussion :{
         type: mongoose.Types.ObjectId,
         ref: "Discussion",
@@ -27,7 +30,7 @@ const courseSchema = new mongoose.Schema(
       ref: "User",
       validate: {
         validator: async function (value) {
-          const user = await User("User").findById(value);
+          const user = await User.findById(value);
           return user && user.role === "Instructor";
         },
         message:
