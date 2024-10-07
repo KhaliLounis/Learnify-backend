@@ -4,9 +4,7 @@ const User = require("../models/User");
 const getQuiz = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
-const getModuleQuizzes = async (req, res) => {
-  res.status(200).json({ message: "yes" });
-};
+
 const createQuiz = async (req, res) => {
   res.status(200).json({ message: "yes" });
 };
@@ -26,5 +24,4 @@ module.exports = {
   updateQuiz,
   deleteQuiz,
   submitQuiz,
-  getModuleQuizzes,
 };

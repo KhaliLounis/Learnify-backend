@@ -6,7 +6,6 @@ const {
   updateAssignment,
   submitAssignment,
   deleteAssignment,
-  getCourseAssignments,
 } = require("../controllers/assignmentsController");
 
 router

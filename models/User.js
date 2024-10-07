@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, "Please provide password"],
-      minlength: [8,"Passowrd needs to be at least 8 chararcters"], //check why it isnt working
+      minlength: [8, "Passowrd needs to be at least 8 chararcters"], //check why it isnt working
     },
     joinedCourses: [
       {
@@ -34,9 +34,38 @@ const userSchema = new mongoose.Schema(
       enum: ["Student", "Instructor", "Admin"],
       required: [true, "Please provide role"],
     },
+    level: {
+      type: String,
+      required: function () {
+        return this.role === "Student";
+      },
+      validate: {
+        validator: function (value) {
+          return this.role === "Student" || value === undefined;
+        },
+        message: "The 'level' field should only be set for students.",
+      },
+      default: undefined,
+    },
   },
   { timestamps: true }
 );
 userSchema.index({ role: 1, email: 1 });
 
+userSchema.pre("save", function (next) {
+  if (this.role !== "Student") {
+    this.level = undefined;
+  }
+  next();
+});
+userSchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate();
+
+  if (update.role && update.role !== "Student" && update.level) {
+    delete update.level;
+  }
+
+  this.options.runValidators = true;
+  next();
+});
 module.exports = mongoose.model("User", userSchema);

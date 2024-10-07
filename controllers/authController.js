@@ -3,7 +3,7 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, level } = req.body;
   if (!name || !email || !password || !role) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -13,14 +13,18 @@ const register = async (req, res) => {
   }
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
-  const user = await User.create({
+  const newUser = {
     name,
     email,
     password: hashedPassword,
     role,
-  });
+  };
+  if (role === "Student" && level) {
+    newUser.level = level;
+  }
+  const user = await User.create(newUser);
   const token = jwt.sign(
-    { userId: user._id, role },
+    { userId: user._id, name, role, level },
     process.env.JWT_SECRET_KEY,
     { expiresIn: "24h" }
   );
@@ -46,7 +50,7 @@ const login = async (req, res) => {
     return res.status(400).json({ message: "Invalid credentials" });
   }
   const token = jwt.sign(
-    { userId: user._id, name: user.name, role: user.role },
+    { userId: user._id, name: user.name, role: user.role, level: user.level },
     process.env.JWT_SECRET_KEY,
     { expiresIn: "24h" }
   );

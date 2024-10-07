@@ -12,9 +12,9 @@ const assignmentSchema = new mongoose.Schema({
     type: Date,
     required: [true, "Please provide the deadline date"],
   },
-  moduleId: {
+  courseId: {
     type: mongoose.Types.ObjectId,
-    ref: "Module",
+    ref: "Course",
     required:true
   },
   submittedFiles: [

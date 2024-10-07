@@ -2,14 +2,16 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const getUser = async (req, res) => {
   const { id } = req.params;
-  const user = await User.findById(id).select("-password");
+  const user = await User.findById(id)
+    .select("-password")
+    .populate("joinedCourses");
   if (!user) {
     return res.status(404).json({ message: "User not found" });
   }
   res.status(200).json(user);
 };
 const getAllUsers = async (req, res) => {
-  const users = await User.find().select("-password");
+  const users = await User.find().select("-password").populate("joinedCourses");
   if (!users) {
     return res.status(404).json({ message: "No user was found" });
   }
@@ -22,12 +24,16 @@ const deleteUser = async (req, res) => {
 };
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, email, role, password } = req.body;
+  const { name, email, role, password, level } = req.body;
+
   const userData = {
     name,
     role,
   };
 
+  if (level && role === "Student") {
+    userData.level = level;
+  }
   const existingUser = await User.findById(id);
   if (!existingUser) {
     return res.status(404).json({ message: "User not found" });

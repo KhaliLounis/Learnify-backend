@@ -16,6 +16,7 @@ const moduleSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "Course",
     required: true,
+    unique: true,
   },
   quizIds: [
     {
@@ -25,7 +26,7 @@ const moduleSchema = new mongoose.Schema({
   ],
   resources: [
     {
-      type: String, // Links to external resources like readings or videos
+      type: String,
     },
   ],
 });

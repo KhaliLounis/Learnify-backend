@@ -11,6 +11,7 @@ const verifyAuth = (req, res, next) => {
       userId: payload.userId,
       name: payload.name,
       role: payload.role,
+      level: payload.level,
     };
     next();
   } catch (error) {

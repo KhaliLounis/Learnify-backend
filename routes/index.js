@@ -1,20 +1,22 @@
 const router = require("express").Router();
 const authRouter = require("./auth");
-const userRouter = require("./user");
-const discussionRouter = require("./discussion");
-const courseRouter = require("./course");
-const moduleRouter = require("./module");
+const userRouter = require("./users");
+const discussionRouter = require("./discussions");
+const coursesRouter = require("./courses");
+const modulesRouter = require("./modules");
+const quizzesRouter = require("./quizzes");
+const assignmentsRouter = require("./assignments");
 const progressRouter = require("./progress");
-const quizRouter = require("./quiz");
-const assignmentRouter = require("./assignment");
+
 const verifyAuth = require("../middleware/auth");
+
 router.use("/auth", authRouter);
 router.use("/users", userRouter);
-router.use("/discussions", discussionRouter);
-router.use("/courses", verifyAuth, courseRouter);
-router.use("/modules", moduleRouter);
-router.use("/quizzes", quizRouter);
-router.use("/assignments", assignmentRouter);
+router.use("/courses", verifyAuth, coursesRouter);
+router.use("/courses/:courseId/modules", verifyAuth, modulesRouter);
+router.use("/discussions", verifyAuth, discussionRouter);
+router.use("/quizzes", verifyAuth, quizzesRouter);
+router.use("/assignments", verifyAuth, assignmentsRouter);
 // router.use("/progress", progressRouter);
 
 module.exports = router;

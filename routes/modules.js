@@ -5,11 +5,14 @@ const {
   createModule,
   updateModule,
   deleteModule,
-  getCourseModules,
 } = require("../controllers/modulesController");
 
-router.route("/:id").get(getModule).patch(updateModule).delete(deleteModule);
+
 router.route("/").post(createModule);
-// router.route("/course/:id").get(getCourseModules);
+router
+  .route("/:moduleId")
+  .get(getModule)
+  .patch(updateModule)
+  .delete(deleteModule);
 
 module.exports = router;

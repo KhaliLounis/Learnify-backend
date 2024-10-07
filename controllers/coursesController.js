@@ -2,7 +2,13 @@ const Course = require("../models/Course");
 const User = require("../models/User");
 const getCourse = async (req, res) => {
   const { courseId } = req.params;
-  const course = await Course.findById(courseId); //the populate
+  const course = await Course.findById(courseId).populate([
+    { path: "discussion" },
+    { path: "moduleIds" },
+    { path: "assignmentIds" },
+    { path: "instructorId" },
+  ]);
+
   if (!course) {
     return res.status(404).json({ message: "course not found" });
   }
@@ -72,15 +78,46 @@ const deleteCourse = async (req, res) => {
 const getUserCourses = async (req, res) => {
   const { userId } = req.user;
   const courses = await User.findById(userId)
-    .populate("courses")
-    .select("courses");
+    .populate("joinedCourses")
+    .select("joinedCourses");
   res.status(200).json(courses);
 };
 const enrollInCourse = async (req, res) => {
-  res.status(200).json({ message: "yes" });
+  const { userId, level } = req.user;
+  const { courseId } = req.params;
+  console.log(courseId);
+  const course = await Course.findById(courseId);
+  console.log(course);
+  if (!course) {
+    return res.status(404).json({ message: "Course not found" });
+  }
+  if (course.level !== level) {
+    return res.status(403).json({ message: "You can't enroll in this course" });
+  }
+  const user = await User.findByIdAndUpdate(
+    userId,
+    {
+      $addToSet: { joinedCourses: courseId },
+    },
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({ message: "Enrolled successfully" });
 };
 const unenrollInCourse = async (req, res) => {
-  res.status(200).json({ message: "yes" });
+  const { userId } = req.user;
+  const { courseId } = req.params;
+  const course = await Course.findById(courseId);
+  if (!course) {
+    return res.status(404).json({ message: "Course not found" });
+  }
+  const user = await User.findByIdAndUpdate(
+    userId,
+    {
+      $pull: { joinedCourses: courseId },
+    },
+    { new: true, runValidators: true }
+  );
+  res.status(200).json({ message: "Unenrolled successfully" });
 };
 module.exports = {
   getCourse,

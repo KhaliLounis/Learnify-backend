@@ -12,10 +12,14 @@ const {
 
 router.route("/").post(createCourse).get(getUserCourses);
 
-router.route("/:id").get(getCourse).patch(updateCourse).delete(deleteCourse);
+router
+  .route("/:courseId")
+  .get(getCourse)
+  .patch(updateCourse)
+  .delete(deleteCourse);
 
-router.route("/:id/enroll").post(enrollInCourse);
+router.route("/:courseId/enroll").patch(enrollInCourse);
 
-router.route("/:id/unenroll").delete(unenrollInCourse);
+router.route("/:courseId/unenroll").patch(unenrollInCourse);
 
 module.exports = router;
