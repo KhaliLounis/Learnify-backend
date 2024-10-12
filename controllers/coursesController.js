@@ -66,13 +66,17 @@ const updateCourse = async (req, res) => {
 };
 const deleteCourse = async (req, res) => {
   const { courseId } = req.params;
-  const { role } = req.user;
-  if (role !== "Instructor") {
+  const { userId } = req.user;
+  const course = await Course.findById(courseId);
+  if (!course) {
+    return res.status(404).json({ message: "Course was not found" });
+  }
+  if (course.instructorId.toString() !== userId) {
     return res
       .status(403)
-      .json({ message: "Only instructors can delete courses " });
+      .json({ message: "Only the course's instructor can delete it" });
   }
-  const course = await Course.findByIdAndDelete(courseId);
+  await Course.deleteOne({ _id: courseId });
   res.status(200).json({ message: "Course deleted successfully" });
 };
 const getUserCourses = async (req, res) => {

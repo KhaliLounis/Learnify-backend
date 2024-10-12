@@ -21,7 +21,7 @@ const courseSchema = new mongoose.Schema(
         ref: "Module",
       },
     ],
-    assignmentsIds: [
+    assignmentIds: [
       {
         type: mongoose.Types.ObjectId,
         ref: "Assignment",

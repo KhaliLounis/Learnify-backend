@@ -3,6 +3,7 @@ require("express-async-errors");
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const fileUpload = require("express-fileupload");
 
 const connectDB = require("./db/connect");
 const notFound = require("./middleware/not-found");
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(fileUpload({ useTempFiles: true }));
 
 app.use("/api", router);
 
@@ -23,6 +25,7 @@ app.use(errorHandler);
 app.use(notFound);
 
 const start = async () => {
+
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => {

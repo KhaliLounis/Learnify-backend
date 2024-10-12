@@ -9,11 +9,11 @@ const {
 } = require("../controllers/assignmentsController");
 
 router
-  .route("/:id")
+  .route("/:courseId/:assignmentId")
   .get(getAssignment)
   .patch(updateAssignment)
   .delete(deleteAssignment);
-router.route("/").post(createAssignment);
-router.route("/:id/submit").post(submitAssignment);
+router.route("/:courseId").post(createAssignment);
+router.route("/:courseId/:assignmentId/submit").post(submitAssignment);
 
 module.exports = router;

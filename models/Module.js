@@ -16,7 +16,6 @@ const moduleSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "Course",
     required: true,
-    unique: true,
   },
   quizIds: [
     {

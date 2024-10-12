@@ -13,7 +13,7 @@ const verifyAuth = require("../middleware/auth");
 router.use("/auth", authRouter);
 router.use("/users", userRouter);
 router.use("/courses", verifyAuth, coursesRouter);
-router.use("/courses/:courseId/modules", verifyAuth, modulesRouter);
+router.use("/modules", verifyAuth, modulesRouter);
 router.use("/discussions", verifyAuth, discussionRouter);
 router.use("/quizzes", verifyAuth, quizzesRouter);
 router.use("/assignments", verifyAuth, assignmentsRouter);
