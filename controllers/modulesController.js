@@ -50,7 +50,7 @@ const updateModule = async (req, res) => {
   if (!title) {
     return res.status(400).json({ message: "Please provide the new title" });
   }
-  const course = Course.findById(courseId);
+  const course = await Course.findById(courseId);
   if (!course) {
     res.status(404).json({ message: "No course found with this id" });
   }
@@ -60,7 +60,7 @@ const updateModule = async (req, res) => {
       .status(403)
       .json({ message: "Only the course instructor can update it" });
   }
-  const module = Module.findByIdAndUpdate(
+  const module = await Module.findByIdAndUpdate(
     moduleId,
     { title },
     { new: true, runValidators: true }
@@ -121,7 +121,7 @@ const addContentToModule = async (req, res) => {
   const { courseId, moduleId } = req.params;
   const { userId } = req.user;
   const { contentTitle, description } = req.body;
-  console.log(contentTitle, description)
+  console.log(contentTitle, description);
   if (!contentTitle) {
     return res
       .status(400)
@@ -149,11 +149,11 @@ const addContentToModule = async (req, res) => {
     const files = Array.isArray(req.files.documents)
       ? req.files.documents
       : [req.files.documents];
-    console.log(files)
+    console.log(files);
     for (const file of files) {
       try {
         const fileUrl = await uploadDocument(file);
-        console.log(fileUrl)
+        console.log(fileUrl);
         contentFiles.push(fileUrl);
       } catch (error) {
         return res

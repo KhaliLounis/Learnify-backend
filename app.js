@@ -25,7 +25,6 @@ app.use(errorHandler);
 app.use(notFound);
 
 const start = async () => {
-
   try {
     await connectDB(process.env.MONGO_URI);
     app.listen(PORT, () => {

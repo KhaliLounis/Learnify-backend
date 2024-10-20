@@ -12,10 +12,6 @@ const quizSchema = new mongoose.Schema({
       correctAnswer: String,
     },
   ],
-  moduleId: {
-    type: mongoose.Types.ObjectId,
-    ref: "Module",  
-  },
   courseId: {
     type: mongoose.Types.ObjectId,
     ref: "Course",
@@ -23,6 +19,16 @@ const quizSchema = new mongoose.Schema({
   duration: {
     type: Number,
   },
+  submittedAnswers: [
+    {
+      submittedAnswers: [String],
+      userId: {
+        type: mongoose.Types.ObjectId,
+        ref: "User",
+      },
+      submitDate: Date,
+    },
+  ],
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);

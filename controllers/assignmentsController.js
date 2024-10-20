@@ -61,7 +61,7 @@ const updateAssignment = async (req, res) => {
       message: "Only the course instructor can update this assignment",
     });
   }
-  const assignment = Assignment.findByIdAndUpdate(
+  const assignment = await Assignment.findByIdAndUpdate(
     assignmentId,
     { title, description, dueDate },
     { new: true, runValidators: true }
@@ -81,23 +81,25 @@ const deleteAssignment = async (req, res) => {
       message: "Only the course instructor can delete this assignment",
     });
   }
-  const assignment = Assignment.findByIdAndDelete(assignmentId);
+  const assignment = await Assignment.findByIdAndDelete(assignmentId);
 
   res.status(200).json({ message: "Assignment deleted successfully" });
 };
 const submitAssignment = async (req, res) => {
   const { courseId, assignmentId } = req.params;
   const { userId } = req.user;
-  const { submitDate } = req.body;
+  const submitDate = Date.now();
   const assignment = await Assignment.findById(assignmentId);
   if (!assignment) {
     return res.status(404).json({ message: "Assignment not found" });
   }
-  const user = await User.findById(userId );
-  if (!(user.joinedCourses.includes(courseId))) {
-    return res.status(403).json({ message: "You are not enrolled in this course" });
+  const user = await User.findById(userId);
+  if (!user.joinedCourses.includes(courseId)) {
+    return res
+      .status(403)
+      .json({ message: "You are not enrolled in this course" });
   }
-  let fileUrl
+  let fileUrl;
   if (req.files && req.files.documents) {
     try {
       fileUrl = await uploadDocument(req.files.documents);

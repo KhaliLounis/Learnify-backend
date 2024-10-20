@@ -17,12 +17,6 @@ const moduleSchema = new mongoose.Schema({
     ref: "Course",
     required: true,
   },
-  quizIds: [
-    {
-      type: mongoose.Types.ObjectId,
-      ref: "Quiz",
-    },
-  ],
   resources: [
     {
       type: String,

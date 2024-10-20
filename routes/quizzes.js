@@ -8,8 +8,8 @@ const {
   submitQuiz,
 } = require("../controllers/quizzesController");
 
-router.route("/:quizId").get(getQuiz).patch(updateQuiz).delete(deleteQuiz);
-router.route("/:quizId/submit").post(submitQuiz);
-router.route("/").post(createQuiz);
+router.route("/:courseId/:quizId").get(getQuiz).patch(updateQuiz).delete(deleteQuiz);
+router.route("/:courseId/:quizId/submit").post(submitQuiz);
+router.route("/:courseId").post(createQuiz);
 
 module.exports = router;

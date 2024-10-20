@@ -15,7 +15,7 @@ router
   .get(getModule)
   .patch(updateModule)
   .delete(deleteModule);
-router.route("/:courseId/:moduleId/add-resources").patch(addResourcesToModule);
-router.route("/:courseId/:moduleId/add-content").patch(addContentToModule);
+router.route("/:courseId/:moduleId/add-resources").post(addResourcesToModule);
+router.route("/:courseId/:moduleId/add-content").post(addContentToModule);
 
 module.exports = router;
