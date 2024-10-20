@@ -28,7 +28,7 @@ const createModule = async (req, res) => {
   if (!course) {
     return res.status(404).json({ message: "Course not found" });
   }
-  console.log(course.instructorId,userId)
+  console.log(course.instructorId, userId);
   if (course.instructorId.toString() !== userId) {
     return res
       .status(403)
@@ -54,7 +54,7 @@ const updateModule = async (req, res) => {
   if (!course) {
     res.status(404).json({ message: "No course found with this id" });
   }
-  console.log(course.instructorId, userId)
+  console.log(course.instructorId, userId);
   if (course.instructorId.toString() !== userId) {
     res
       .status(403)
@@ -101,7 +101,7 @@ const addResourcesToModule = async (req, res) => {
   if (
     course.instructorId.toString() !== userId ||
     course.moduleIds.indexOf(moduleId) === -1
-  ) { 
+  ) {
     return res
       .status(403)
       .json({ message: "Only the course's instructor can add resource" });
@@ -121,6 +121,7 @@ const addContentToModule = async (req, res) => {
   const { courseId, moduleId } = req.params;
   const { userId } = req.user;
   const { contentTitle, description } = req.body;
+  console.log(contentTitle, description)
   if (!contentTitle) {
     return res
       .status(400)
@@ -138,16 +139,21 @@ const addContentToModule = async (req, res) => {
       .status(403)
       .json({ message: "Only the course's instructor can add content" });
   }
+  const module = await Module.findById(moduleId);
+  if (!module) {
+    return res.status(404).json({ message: "Module not found" });
+  }
   let contentFiles = [];
 
   if (req.files && req.files.documents) {
     const files = Array.isArray(req.files.documents)
       ? req.files.documents
       : [req.files.documents];
-
+    console.log(files)
     for (const file of files) {
       try {
         const fileUrl = await uploadDocument(file);
+        console.log(fileUrl)
         contentFiles.push(fileUrl);
       } catch (error) {
         return res
@@ -155,11 +161,6 @@ const addContentToModule = async (req, res) => {
           .json({ message: "File upload failed", error: error.message });
       }
     }
-  }
-
-  const module = await Module.findById(moduleId);
-  if (!module) {
-    return res.status(404).json({ message: "Module not found" });
   }
 
   const newContent = {

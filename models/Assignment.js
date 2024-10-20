@@ -24,7 +24,7 @@ const assignmentSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "User",
       },
-      submittedOn: Date,
+      submitDate: Date,
     },
   ],
 });

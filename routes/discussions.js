@@ -9,13 +9,14 @@ const {
   deleteDiscussion,
 } = require("../controllers/discussionsController");
 
+router.route("/").post(createDiscussion);
+
 router
-  .route("/")
+  .route("/discussionId")
   .get(getDiscussion)
-  .post(createDiscussion)
   .patch(updateDiscussion)
   .delete(deleteDiscussion);
-router.route("/:id/upvote").patch(upvoteDiscussion);
-router.route("/:id/reply").post(replyToDiscussion);
+router.route("/:discussionId/upvote").post(upvoteDiscussion);
+router.route("/:discussionId/reply").post(replyToDiscussion);
 
 module.exports = router;

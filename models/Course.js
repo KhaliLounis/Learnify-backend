@@ -27,6 +27,12 @@ const courseSchema = new mongoose.Schema(
         ref: "Assignment",
       },
     ],
+    quizIds: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "Quiz",  
+      },
+    ],
     discussion :{
         type: mongoose.Types.ObjectId,
         ref: "Discussion",

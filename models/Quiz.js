@@ -14,12 +14,15 @@ const quizSchema = new mongoose.Schema({
   ],
   moduleId: {
     type: mongoose.Types.ObjectId,
-    ref: "Module",
+    ref: "Module",  
+  },
+  courseId: {
+    type: mongoose.Types.ObjectId,
+    ref: "Course",
   },
   duration: {
     type: Number,
   },
-
 });
 
 module.exports = mongoose.model("Quiz", quizSchema);
