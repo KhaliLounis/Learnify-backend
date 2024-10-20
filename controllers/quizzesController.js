@@ -118,15 +118,30 @@ const submitQuiz = async (req, res) => {
   if (!quiz) {
     return res.status(404).json({ message: "No quiz was found with this id" });
   }
+
   const user = await User.findById(userId);
   if (!user.joinedCourses.includes(courseId)) {
     return res
       .status(403)
       .json({ message: "You are not enrolled in this course " });
   }
-  quiz.submittedAnswers.push({ submittedAnswers, submitDate, userId: user._id });
+  const questions = quiz.questions;
+  let score = 0;
+  let i = 0;
+  for (const question of questions) {
+    if (question.correctAnswer === submittedAnswers[i]) {
+      score += 1;
+    }
+    i += 1;
+  }
+  quiz.submittedAnswers.push({
+    submittedAnswers,
+    submitDate,
+    userId: user._id,
+    score,
+  });
   await quiz.save();
-  return res.status(200).json({ message: "Quiz submitted successfully" });
+  return res.status(200).json({ message: "Quiz submitted successfully", quiz });
 };
 
 module.exports = {

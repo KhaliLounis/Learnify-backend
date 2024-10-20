@@ -27,6 +27,7 @@ const quizSchema = new mongoose.Schema({
         ref: "User",
       },
       submitDate: Date,
+      score: { type: Number, default: 0 },
     },
   ],
 });
