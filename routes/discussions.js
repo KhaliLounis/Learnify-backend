@@ -9,14 +9,14 @@ const {
   deleteDiscussion,
 } = require("../controllers/discussionsController");
 
-router.route("/").post(createDiscussion);
+router.route("/:courseId").post(createDiscussion);
 
 router
-  .route("/discussionId")
+  .route("/:courseId/:discussionId")
   .get(getDiscussion)
   .patch(updateDiscussion)
   .delete(deleteDiscussion);
-router.route("/:discussionId/upvote").post(upvoteDiscussion);
-router.route("/:discussionId/reply").post(replyToDiscussion);
+router.route("/:courseId/:discussionId/upvote").post(upvoteDiscussion);
+router.route("/:courseId/:discussionId/reply").post(replyToDiscussion);
 
 module.exports = router;

@@ -4,7 +4,7 @@ const discussionSchema = new mongoose.Schema(
   {
     content: {
       type: String,
-      required: [true, "Please provide discussion content"],
+      required: true
     },
     courseId: {
       type: mongoose.Types.ObjectId,
@@ -22,9 +22,9 @@ const discussionSchema = new mongoose.Schema(
           type: mongoose.Types.ObjectId,
           ref: "User",
         },
-        content: {
+        replyText: {
           type: String,
-          required: [true, "Please provide reply content"],
+          required: [true, "Please provide reply text"],
         },
         createdAt: {
           type: Date,

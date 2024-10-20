@@ -33,10 +33,10 @@ const courseSchema = new mongoose.Schema(
         ref: "Quiz",  
       },
     ],
-    discussion :{
+    discussionIds :[{
         type: mongoose.Types.ObjectId,
         ref: "Discussion",
-    },
+    }],
     instructorId: {
       type: mongoose.Types.ObjectId,
       ref: "User",

@@ -1,7 +1,7 @@
 const Module = require("../models/Module");
 const Course = require("../models/Course");
-const uploadImage = require("../utils/upload");
 const uploadDocument = require("../utils/upload");
+const uploadImage = require("../utils/upload");
 
 const getModule = async (req, res) => {
   const { moduleId } = req.params;

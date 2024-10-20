@@ -83,9 +83,12 @@ const updateQuiz = async (req, res) => {
   if (course.instructorId.toString() !== userId) {
     return res
       .status(403)
-      .json({ message: "Only the course instructor can create quizzes" });
+      .json({ message: "Only the course instructor can update this quiz" });
   }
-  await Quiz.findByIdAndUpdate({ title, questions, courseId, duration });
+  await Quiz.findByIdAndUpdate(
+    { title, questions, courseId, duration },
+    { new: true, runValidators: true }
+  );
   return res.status(201).json({ message: "Course updated successfully" });
 };
 const deleteQuiz = async (req, res) => {

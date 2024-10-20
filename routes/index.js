@@ -13,8 +13,8 @@ router.use("/auth", authRouter);
 router.use("/users", userRouter);
 router.use("/courses", verifyAuth, coursesRouter);
 router.use("/modules", verifyAuth, modulesRouter);
-router.use("/discussions", verifyAuth, discussionRouter);
 router.use("/quizzes", verifyAuth, quizzesRouter);
 router.use("/assignments", verifyAuth, assignmentsRouter);
+router.use("/discussions", verifyAuth, discussionRouter);
 
 module.exports = router;

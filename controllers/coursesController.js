@@ -3,7 +3,7 @@ const User = require("../models/User");
 const getCourse = async (req, res) => {
   const { courseId } = req.params;
   const course = await Course.findById(courseId).populate([
-    { path: "discussion" },
+    { path: "discussionIds" },
     { path: "moduleIds" },
     { path: "assignmentIds" },
     { path: "instructorId" },
@@ -89,9 +89,7 @@ const getUserCourses = async (req, res) => {
 const enrollInCourse = async (req, res) => {
   const { userId, level } = req.user;
   const { courseId } = req.params;
-  console.log(courseId);
   const course = await Course.findById(courseId);
-  console.log(course);
   if (!course) {
     return res.status(404).json({ message: "Course not found" });
   }
