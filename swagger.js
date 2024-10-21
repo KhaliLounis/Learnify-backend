@@ -11,7 +11,7 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:5000/api', // Your server URL
+        url: 'https://learnify-y5o7.onrender.com/api', // Your server URL
       },
     ],
     components: {
