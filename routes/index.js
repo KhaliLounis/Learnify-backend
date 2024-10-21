@@ -10,7 +10,7 @@ const assignmentsRouter = require("./assignments");
 const verifyAuth = require("../middleware/auth");
 
 router.use("/auth", authRouter);
-router.use("/users", userRouter);
+router.use("/users", verifyAuth, userRouter);
 router.use("/courses", verifyAuth, coursesRouter);
 router.use("/modules", verifyAuth, modulesRouter);
 router.use("/quizzes", verifyAuth, quizzesRouter);

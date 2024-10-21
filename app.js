@@ -4,6 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpec = require('./swagger');
 
 const connectDB = require("./db/connect");
 const notFound = require("./middleware/not-found");
@@ -19,6 +21,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload({ useTempFiles: true }));
 
+app.use(
+  "/api-docs",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerSpec, { explorer: true })
+);
 app.use("/api", router);
 
 app.use(errorHandler);

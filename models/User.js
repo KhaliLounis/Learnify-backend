@@ -58,14 +58,14 @@ userSchema.pre("save", function (next) {
   }
   next();
 });
-userSchema.pre("findOneAndUpdate", function (next) {
-  const update = this.getUpdate();
-
-  if (update.role && update.role !== "Student" && update.level) {
-    delete update.level;
+userSchema.pre("save", async function (next) {
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(this.password, salt);
+    this.password = hashedPassword;
+    next();
+  } catch (err) {
+    next(err);
   }
-
-  this.options.runValidators = true;
-  next();
 });
 module.exports = mongoose.model("User", userSchema);
