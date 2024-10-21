@@ -1,4 +1,7 @@
 const Course = require("../models/Course");
+const Module = require("../models/Module");
+const Quiz = require("../models/Quiz");
+const Discussion = require("../models/Discussion");
 const User = require("../models/User");
 const getCourse = async (req, res) => {
   const { courseId } = req.params;
@@ -26,7 +29,8 @@ const createCourse = async (req, res) => {
     return res
       .status(403)
       .json({ message: "Only instructors can create courses " });
-  }''
+  }
+  ("");
   const course = await Course.create({
     title,
     description,
@@ -76,8 +80,14 @@ const deleteCourse = async (req, res) => {
       .status(403)
       .json({ message: "Only the course's instructor can delete it" });
   }
+  await Module.deleteMany({ courseId });
+  await Quiz.deleteMany({ courseId });
+  await Discussion.deleteMany({ courseId });
+
   await Course.deleteOne({ _id: courseId });
-  res.status(200).json({ message: "Course deleted successfully" });
+  return res.status(200).json({
+    message: "Course and its associated resources deleted successfully",
+  });
 };
 const getUserCourses = async (req, res) => {
   const { userId } = req.user;
@@ -87,7 +97,7 @@ const getUserCourses = async (req, res) => {
   res.status(200).json(courses);
 };
 const enrollInCourse = async (req, res) => {
-  const { userId, level } = req.user;
+  const { userId, level, role } = req.user;
   const { courseId } = req.params;
   const course = await Course.findById(courseId);
   if (!course) {
@@ -95,6 +105,11 @@ const enrollInCourse = async (req, res) => {
   }
   if (course.level !== level) {
     return res.status(403).json({ message: "You can't enroll in this course" });
+  }
+  if (role !== "Student") {
+    return res
+      .status(403)
+      .json({ message: "Only students can enroll in courses" });
   }
   const user = await User.findByIdAndUpdate(
     userId,
@@ -111,6 +126,11 @@ const unenrollInCourse = async (req, res) => {
   const course = await Course.findById(courseId);
   if (!course) {
     return res.status(404).json({ message: "Course not found" });
+  }
+  if (role !== "Student") {
+    return res
+      .status(403)
+      .json({ message: "Only students can unenroll from courses" });
   }
   const user = await User.findByIdAndUpdate(
     userId,
