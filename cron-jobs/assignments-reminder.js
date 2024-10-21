@@ -6,8 +6,8 @@ const User = require("../models/User");
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "khalil43k@gmail.com",
-    pass: process.env.PASSWORD, 
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASSWORD, 
   },
 });
 
@@ -34,7 +34,6 @@ cron.schedule("0 0 * * *", async () => {
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   try {
-    // Find assignments that are due tomorrow
     const assignmentsDueTomorrow = await Assignment.find({
       dueDate: {
         $gte: new Date(tomorrow.setHours(0, 0, 0, 0)),
@@ -42,7 +41,6 @@ cron.schedule("0 0 * * *", async () => {
       },
     }).populate("courseId");
 
-    // Loop over each assignment and send reminders
     for (const assignment of assignmentsDueTomorrow) {
       const course = assignment.courseId;
       if (course) {
@@ -50,7 +48,6 @@ cron.schedule("0 0 * * *", async () => {
           joinedCourses: course._id,
         });
 
-        // Send an email to each student
         for (const student of enrolledStudents) {
           await sendReminderEmail(
             student.email,

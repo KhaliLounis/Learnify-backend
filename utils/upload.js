@@ -36,33 +36,4 @@ const uploadDocument = async (file) => {
   });
 };
 
-(module.exports = uploadImage), uploadDocument;
-
-//new function to be set
-// const cloudinary = require('cloudinary').v2;
-
-// cloudinary.config({
-//   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-//   api_key: process.env.CLOUDINARY_API_KEY,
-//   api_secret: process.env.CLOUDINARY_API_SECRET,
-// });
-
-// const uploadFile = async (file, folderName, fileType = 'image') => {
-//   try {
-//     // Set the resource type based on the file type
-//     const options = {
-//       use_filename: true,
-//       folder: folderName || 'default-folder',
-//       resource_type: fileType === 'image' ? 'image' : 'raw',
-//     };
-
-//     // Upload the file
-//     const result = await cloudinary.uploader.upload(file.tempFilePath, options);
-
-//     return result.secure_url; // Return the secure URL of the uploaded file
-//   } catch (error) {
-//     throw new Error(`${fileType.charAt(0).toUpperCase() + fileType.slice(1)} upload failed: ${error.message}`);
-//   }
-// };
-
-// module.exports = uploadFile;
+module.exports = uploadImage, uploadDocument;

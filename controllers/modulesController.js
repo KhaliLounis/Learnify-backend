@@ -28,7 +28,6 @@ const createModule = async (req, res) => {
   if (!course) {
     return res.status(404).json({ message: "Course not found" });
   }
-  console.log(course.instructorId, userId);
   if (course.instructorId.toString() !== userId) {
     return res
       .status(403)
@@ -54,7 +53,6 @@ const updateModule = async (req, res) => {
   if (!course) {
     res.status(404).json({ message: "No course found with this id" });
   }
-  console.log(course.instructorId, userId);
   if (course.instructorId.toString() !== userId) {
     res
       .status(403)
@@ -121,7 +119,6 @@ const addContentToModule = async (req, res) => {
   const { courseId, moduleId } = req.params;
   const { userId } = req.user;
   const { contentTitle, description } = req.body;
-  console.log(contentTitle, description);
   if (!contentTitle) {
     return res
       .status(400)

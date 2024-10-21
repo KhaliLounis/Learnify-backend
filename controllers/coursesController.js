@@ -26,7 +26,7 @@ const createCourse = async (req, res) => {
     return res
       .status(403)
       .json({ message: "Only instructors can create courses " });
-  }
+  }''
   const course = await Course.create({
     title,
     description,
