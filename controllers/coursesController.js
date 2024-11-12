@@ -64,7 +64,7 @@ const updateCourse = async (req, res) => {
     {
       new: true,
       runValidators: true,
-    }
+    },
   );
   res.status(200).json(course);
 };
@@ -116,7 +116,7 @@ const enrollInCourse = async (req, res) => {
     {
       $addToSet: { joinedCourses: courseId },
     },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   );
   res.status(200).json({ message: "Enrolled successfully" });
 };
@@ -137,7 +137,7 @@ const unenrollInCourse = async (req, res) => {
     {
       $pull: { joinedCourses: courseId },
     },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   );
   res.status(200).json({ message: "Unenrolled successfully" });
 };

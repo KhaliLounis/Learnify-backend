@@ -8,9 +8,61 @@ const {
 } = require("../controllers/usersController");
 
 router.route("/:id").get(getUser).patch(updateUser).delete(deleteUser);
-router.route("/").get(getAllUsers)
+router.route("/").get(getAllUsers);
 
 module.exports = router;
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - name
+ *         - email
+ *         - password
+ *         - role
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the user.
+ *           example: "John Doe"
+ *         imageUrl:
+ *           type: string
+ *           description: The URL of the user's profile image (optional).
+ *           example: "https://example.com/profile.jpg"
+ *         email:
+ *           type: string
+ *           description: The email address of the user.
+ *           example: "john.doe@example.com"
+ *         password:
+ *           type: string
+ *           description: The password of the user (hashed before saving).
+ *           example: "SecurePassword123"
+ *         joinedCourses:
+ *           type: array
+ *           description: A list of course IDs the user has joined.
+ *           items:
+ *             type: string
+ *             example: "60b8c7d1f1a7d7c3d8f5d5d3"
+ *         role:
+ *           type: string
+ *           description: The role of the user.
+ *           enum: ["Student", "Instructor", "Admin"]
+ *           example: "Student"
+ *         level:
+ *           type: string
+ *           description: The education level of the user (only for Students).
+ *           example: "Beginner"
+ *       example:
+ *         name: "John Doe"
+ *         imageUrl: "https://example.com/profile.jpg"
+ *         email: "john.doe@example.com"
+ *         password: "SecurePassword123"
+ *         joinedCourses: ["60b8c7d1f1a7d7c3d8f5d5d3"]
+ *         role: "Student"
+ *         level: "Beginner"
+ */
 /**
  * @swagger
  * tags:

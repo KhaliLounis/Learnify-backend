@@ -64,7 +64,7 @@ const updateAssignment = async (req, res) => {
   const assignment = await Assignment.findByIdAndUpdate(
     assignmentId,
     { title, description, dueDate },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   );
 
   res.status(200).json({ message: "Assignment updated successfully" });

@@ -1,25 +1,24 @@
-// config/swagger.js
-const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerJsdoc = require("swagger-jsdoc");
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'Learning Management System API',
-      version: '1.0.0',
-      description: 'API documentation for the Learning Management System',
+      title: "Learning Management System API",
+      version: "1.0.0",
+      description: "API documentation for the Learning Management System",
     },
     servers: [
       {
-        url: 'https://learnify-y5o7.onrender.com/api', // Your server URL
+        url: "https://learnify-y5o7.onrender.com/api", // Your server URL
       },
     ],
     components: {
       securitySchemes: {
         BearerAuth: {
-          type: 'http',
-          scheme: 'bearer',
-          bearerFormat: 'JWT', // Optional: specify JWT format
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT", // Optional: specify JWT format
         },
       },
     },
@@ -29,7 +28,7 @@ const options = {
       },
     ],
   },
-  apis: ['./routes/*.js'], // Path to your route files (you can adjust this to match your project structure)
+  apis: ["./routes/*.js"], // Path to your route files (you can adjust this to match your project structure)
 };
 
 const swaggerSpec = swaggerJsdoc(options);

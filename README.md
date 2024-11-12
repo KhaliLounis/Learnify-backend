@@ -1,4 +1,3 @@
-
 # Learnify Backend
 
 Learnify is a learning management system backend designed to manage courses, assignments, and user interactions efficiently. This project utilizes Node.js and Express to build a robust server with MongoDB as the database.
@@ -83,7 +82,7 @@ For detailed API endpoints and usage instructions, refer to the online documenta
 ## Scripts
 
 - **start**: Starts the application with Nodemon for automatic restarts during development.
-  
+
   ```bash
   npm start
   ```
@@ -125,5 +124,3 @@ Contributions are welcome! Please follow these steps:
 ## License
 
 This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
-
-

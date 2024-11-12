@@ -48,7 +48,7 @@ const userSchema = new mongoose.Schema(
       default: undefined,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 userSchema.index({ role: 1, email: 1 });
 

@@ -8,11 +8,97 @@ const {
   submitQuiz,
 } = require("../controllers/quizzesController");
 
-router.route("/:courseId/:quizId").get(getQuiz).patch(updateQuiz).delete(deleteQuiz);
+router
+  .route("/:courseId/:quizId")
+  .get(getQuiz)
+  .patch(updateQuiz)
+  .delete(deleteQuiz);
 router.route("/:courseId/:quizId/submit").post(submitQuiz);
 router.route("/:courseId").post(createQuiz);
 
 module.exports = router;
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Quiz:
+ *       type: object
+ *       required:
+ *         - title
+ *         - questions
+ *         - courseId
+ *       properties:
+ *         title:
+ *           type: string
+ *           description: The title of the quiz.
+ *           example: "Math Quiz"
+ *         questions:
+ *           type: array
+ *           description: The list of questions in the quiz.
+ *           items:
+ *             type: object
+ *             properties:
+ *               questionTitle:
+ *                 type: string
+ *                 description: The question title.
+ *                 example: "What is 2 + 2?"
+ *               answers:
+ *                 type: array
+ *                 description: The list of possible answers for the question.
+ *                 items:
+ *                   type: string
+ *                   example: "3"
+ *               correctAnswer:
+ *                 type: string
+ *                 description: The correct answer for the question.
+ *                 example: "4"
+ *         courseId:
+ *           type: string
+ *           description: The course associated with the quiz (referencing the Course model).
+ *           example: "60b8c7d1f1a7d7c3d8f5d5d3"
+ *         duration:
+ *           type: number
+ *           description: The duration of the quiz in minutes.
+ *           example: 30
+ *         submittedAnswers:
+ *           type: array
+ *           description: List of answers submitted by users for this quiz.
+ *           items:
+ *             type: object
+ *             properties:
+ *               submittedAnswers:
+ *                 type: array
+ *                 description: The list of answers submitted by the user.
+ *                 items:
+ *                   type: string
+ *                   example: "4"
+ *               userId:
+ *                 type: string
+ *                 description: The user who submitted the answers.
+ *                 example: "60b8c7d1f1a7d7c3d8f5d5d4"
+ *               submitDate:
+ *                 type: string
+ *                 format: date-time
+ *                 description: The date and time when the quiz was submitted.
+ *                 example: "2024-11-12T12:00:00Z"
+ *               score:
+ *                 type: number
+ *                 description: The score the user received for the quiz submission.
+ *                 example: 80
+ *       example:
+ *         title: "Math Quiz"
+ *         questions:
+ *           - questionTitle: "What is 2 + 2?"
+ *             answers: ["3", "4", "5"]
+ *             correctAnswer: "4"
+ *         courseId: "60b8c7d1f1a7d7c3d8f5d5d3"
+ *         duration: 30
+ *         submittedAnswers:
+ *           - submittedAnswers: ["4"]
+ *             userId: "60b8c7d1f1a7d7c3d8f5d5d4"
+ *             submitDate: "2024-11-12T12:00:00Z"
+ *             score: 80
+ */
 
 /**
  * @swagger

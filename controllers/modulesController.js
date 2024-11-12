@@ -61,7 +61,7 @@ const updateModule = async (req, res) => {
   const module = await Module.findByIdAndUpdate(
     moduleId,
     { title },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   );
 
   res.status(200).json({ message: "Module updated successfully" });
@@ -83,7 +83,7 @@ const deleteModule = async (req, res) => {
   }
   await Module.findByIdAndDelete(moduleId);
   course.moduleIds = course.moduleIds.filter(
-    (id) => id.toString() !== moduleId
+    (id) => id.toString() !== moduleId,
   );
   await course.save();
   res.status(200).json({ message: "Module deleted successfully" });

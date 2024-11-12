@@ -14,7 +14,7 @@ const uploadImage = async (file, folderName) => {
     });
     return result.secure_url;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new Error("Image upload failed");
   }
 };
@@ -29,11 +29,11 @@ const uploadDocument = async (file) => {
         } else {
           resolve(result.secure_url);
         }
-      }
+      },
     );
 
     file.stream.pipe(uploadStream); // Ensure the file is a readable stream
   });
 };
 
-module.exports = uploadImage, uploadDocument;
+(module.exports = uploadImage), uploadDocument;

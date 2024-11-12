@@ -86,7 +86,7 @@ const upvoteDiscussion = async (req, res) => {
       {
         $pull: { upvotes: userId },
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
     return res
       .status(200)
@@ -97,7 +97,7 @@ const upvoteDiscussion = async (req, res) => {
       {
         $addToSet: { upvotes: userId },
       },
-      { new: true, runValidators: true }
+      { new: true, runValidators: true },
     );
     return res.status(200).json({ message: "Upvoted post successfully" });
   }

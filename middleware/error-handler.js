@@ -1,5 +1,5 @@
 const errorHandlerMiddleware = (err, req, res, next) => {
-  console.log(err)
+  console.log(err);
   let customError = {
     statusCode: err.statusCode || 500,
     message: err.message || "Something went wrong try again later",
@@ -13,7 +13,7 @@ const errorHandlerMiddleware = (err, req, res, next) => {
   }
   if (err.code && err.code === 11000) {
     customError.message = `Duplicate value entered for ${Object.keys(
-      err.keyValue
+      err.keyValue,
     )} field, please choose another value`;
     customError.statusCode = 400;
   }
@@ -22,7 +22,9 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     customError.statusCode = 404;
   }
 
-  return res.status(customError.statusCode).json({ message: customError.message });
+  return res
+    .status(customError.statusCode)
+    .json({ message: customError.message });
 };
 
 module.exports = errorHandlerMiddleware;

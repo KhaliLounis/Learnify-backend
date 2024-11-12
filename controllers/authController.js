@@ -38,7 +38,7 @@ const register = async (req, res) => {
   const token = jwt.sign(
     { userId: user._id, name, role, level },
     process.env.JWT_SECRET_KEY,
-    { expiresIn: "24h" }
+    { expiresIn: "24h" },
   );
 
   res.cookie("token", token, {
@@ -69,7 +69,7 @@ const login = async (req, res) => {
   const token = jwt.sign(
     { userId: user._id, name: user.name, role: user.role, level: user.level },
     process.env.JWT_SECRET_KEY,
-    { expiresIn: "24h" }
+    { expiresIn: "24h" },
   );
   res.cookie("token", token, {
     httpOnly: true,

@@ -87,7 +87,7 @@ const updateQuiz = async (req, res) => {
   }
   await Quiz.findByIdAndUpdate(
     { title, questions, courseId, duration },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   );
   return res.status(201).json({ message: "Course updated successfully" });
 };

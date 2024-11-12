@@ -4,7 +4,7 @@ const discussionSchema = new mongoose.Schema(
   {
     content: {
       type: String,
-      required: true
+      required: true,
     },
     courseId: {
       type: mongoose.Types.ObjectId,
@@ -39,7 +39,7 @@ const discussionSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Discussion", discussionSchema);

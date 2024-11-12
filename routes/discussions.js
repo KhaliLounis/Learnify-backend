@@ -20,6 +20,58 @@ router.route("/:courseId/:discussionId/upvote").post(upvoteDiscussion);
 router.route("/:courseId/:discussionId/reply").post(replyToDiscussion);
 
 module.exports = router;
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Discussion:
+ *       type: object
+ *       required:
+ *         - content
+ *         - courseId
+ *         - userId
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The unique identifier for the discussion
+ *         content:
+ *           type: string
+ *           description: The content of the discussion
+ *         courseId:
+ *           type: string
+ *           description: The ID of the associated course
+ *         userId:
+ *           type: string
+ *           description: The ID of the user who created the discussion
+ *         replies:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *                 description: The ID of the user replying to the discussion
+ *               replyText:
+ *                 type: string
+ *                 description: The content of the reply
+ *               createdAt:
+ *                 type: string
+ *                 format: date-time
+ *                 description: The timestamp when the reply was created
+ *         upvotes:
+ *           type: array
+ *           items:
+ *             type: string
+ *             description: The ID of the users who upvoted the discussion
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The timestamp when the discussion was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The timestamp when the discussion was last updated
+ */
 
 /**
  * @swagger

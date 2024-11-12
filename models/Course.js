@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const User = require("./User");
 const courseSchema = new mongoose.Schema(
   {
     title: {
@@ -13,7 +12,7 @@ const courseSchema = new mongoose.Schema(
       type: String,
     },
     imageUrl: {
-        type:String
+      type: String,
     },
     moduleIds: [
       {
@@ -30,13 +29,15 @@ const courseSchema = new mongoose.Schema(
     quizIds: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "Quiz",  
+        ref: "Quiz",
       },
     ],
-    discussionIds :[{
+    discussionIds: [
+      {
         type: mongoose.Types.ObjectId,
         ref: "Discussion",
-    }],
+      },
+    ],
     instructorId: {
       type: mongoose.Types.ObjectId,
       ref: "User",
@@ -50,7 +51,7 @@ const courseSchema = new mongoose.Schema(
       },
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Course", courseSchema);

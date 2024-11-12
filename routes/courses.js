@@ -24,6 +24,65 @@ router.route("/:courseId/unenroll").patch(unenrollInCourse);
 
 module.exports = router;
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Course:
+ *       type: object
+ *       required:
+ *         - title
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The unique identifier for the course
+ *         title:
+ *           type: string
+ *           description: The title of the course
+ *         description:
+ *           type: string
+ *           description: A brief description of the course
+ *         level:
+ *           type: string
+ *           description: The level of the course (e.g., beginner, intermediate, advanced)
+ *         imageUrl:
+ *           type: string
+ *           description: URL of the course image
+ *         moduleIds:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: List of module IDs associated with the course
+ *         assignmentIds:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: List of assignment IDs associated with the course
+ *         quizIds:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: List of quiz IDs associated with the course
+ *         discussionIds:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: List of discussion thread IDs related to the course
+ *         instructorId:
+ *           type: string
+ *           description: The ID of the instructor for the course (must be a user with "Instructor" role)
+ *       example:
+ *         id: "60d9a1b2f1b2a34f3e2d49a2"
+ *         title: "Intro to Web Development"
+ *         description: "Learn the basics of web development, including HTML, CSS, and JavaScript."
+ *         level: "Beginner"
+ *         imageUrl: "http://example.com/course-image.jpg"
+ *         moduleIds: ["60d9a1b2f1b2a34f3e2d49a1", "60d9a1b2f1b2a34f3e2d49a3"]
+ *         assignmentIds: ["60d9a1b2f1b2a34f3e2d49a4"]
+ *         quizIds: ["60d9a1b2f1b2a34f3e2d49a5"]
+ *         discussionIds: ["60d9a1b2f1b2a34f3e2d49a6"]
+ *         instructorId: "60d9a1b2f1b2a34f3e2d49a0"
+ */
 
 /**
  * @swagger

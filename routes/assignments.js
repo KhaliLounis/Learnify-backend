@@ -20,6 +20,60 @@ module.exports = router;
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Assignment:
+ *       type: object
+ *       required:
+ *         - title
+ *         - dueDate
+ *         - courseId
+ *       properties:
+ *         _id:
+ *           type: string
+ *           description: The unique identifier for the assignment
+ *         title:
+ *           type: string
+ *           description: The title of the assignment
+ *         description:
+ *           type: string
+ *           description: The description of the assignment
+ *         dueDate:
+ *           type: string
+ *           format: date-time
+ *           description: The deadline for the assignment
+ *         courseId:
+ *           type: string
+ *           description: The ID of the course associated with the assignment
+ *         submittedFiles:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               fileUrl:
+ *                 type: string
+ *                 description: The URL of the submitted file
+ *               userId:
+ *                 type: string
+ *                 description: The ID of the user who submitted the file
+ *               submitDate:
+ *                 type: string
+ *                 format: date-time
+ *                 description: The date when the file was submitted
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The timestamp when the assignment was created
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *           description: The timestamp when the assignment was last updated
+ *
+
+ */
+
+/**
+ * @swagger
  * tags:
  *   name: Assignments
  *   description: Assignment management API
@@ -240,4 +294,3 @@ module.exports = router;
  *       500:
  *         description: Couldn't upload your document
  */
-

@@ -19,6 +19,62 @@ router.route("/:courseId/:moduleId/add-resources").post(addResourcesToModule);
 router.route("/:courseId/:moduleId/add-content").post(addContentToModule);
 
 module.exports = router;
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Module:
+ *       type: object
+ *       required:
+ *         - title
+ *         - courseId
+ *       properties:
+ *         title:
+ *           type: string
+ *           description: The title of the module.
+ *           example: "Introduction to Node.js"
+ *         content:
+ *           type: array
+ *           description: A list of content objects within the module.
+ *           items:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The title of the content section.
+ *                 example: "Getting Started with Node.js"
+ *               files:
+ *                 type: array
+ *                 description: A list of file paths or URLs related to the content.
+ *                 items:
+ *                   type: string
+ *                   example: "/files/nodejs-intro.pdf"
+ *               description:
+ *                 type: string
+ *                 description: A description of the content.
+ *                 example: "This section introduces Node.js and its features."
+ *         courseId:
+ *           type: string
+ *           format: objectId
+ *           description: The ID of the course to which this module belongs.
+ *           example: "603d2f5f91b8b156506f9c27"
+ *         resources:
+ *           type: array
+ *           description: A list of URLs or paths to resources associated with the module.
+ *           items:
+ *             type: string
+ *             example: "https://example.com/resources/nodejs-tutorial"
+ *       example:
+ *         title: "Introduction to Node.js"
+ *         content:
+ *           - title: "Getting Started with Node.js"
+ *             files:
+ *               - "/files/nodejs-intro.pdf"
+ *             description: "This section introduces Node.js and its features."
+ *         courseId: "603d2f5f91b8b156506f9c27"
+ *         resources:
+ *           - "https://example.com/resources/nodejs-tutorial"
+ */
 
 /**
  * @swagger

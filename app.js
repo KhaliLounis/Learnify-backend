@@ -4,9 +4,9 @@ const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const fileUpload = require("express-fileupload");
-require('./cron-jobs/assignments-reminder');
+require("./cron-jobs/assignments-reminder");
 const swaggerUI = require("swagger-ui-express");
-const swaggerSpec = require('./swagger');
+const swaggerSpec = require("./swagger");
 
 const connectDB = require("./db/connect");
 const notFound = require("./middleware/not-found");
@@ -25,7 +25,7 @@ app.use(fileUpload({ useTempFiles: true }));
 app.use(
   "/api-docs",
   swaggerUI.serve,
-  swaggerUI.setup(swaggerSpec, { explorer: true })
+  swaggerUI.setup(swaggerSpec, { explorer: true }),
 );
 app.use("/api", router);
 

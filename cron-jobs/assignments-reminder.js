@@ -7,7 +7,7 @@ const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASSWORD, 
+    pass: process.env.MAIL_PASSWORD,
   },
 });
 
@@ -52,7 +52,7 @@ cron.schedule("0 0 * * *", async () => {
           await sendReminderEmail(
             student.email,
             course.title,
-            assignment.title
+            assignment.title,
           );
         }
       }
